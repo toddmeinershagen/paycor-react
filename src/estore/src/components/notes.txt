@@ -1,0 +1,30 @@
+JS
+async
+    callback
+    promises
+    generators
+
+modules
+
+React
+-----
+setup
+project anatomy
+bootstrapping
+components
+    class
+    functional
+jsx
+    expressions
+    comments
+    attributes
+    children
+    conditionals
+    iterations
+state
+    class based components
+    this.state = {}
+    this.setState()
+props
+-----
+    parameters -> props
