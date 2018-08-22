@@ -6,10 +6,17 @@ class ProductListItem extends Component {
     render() {
         const {id, title, price, stock} = this.props.product;
         return (
-            <div className="item">
+            <div 
+                className="item"
+                onMouseEnter = {() => console.log("enter")}
+                onMouseLeave = {() => console.log("leave")}
+            >
                 <h1>{title} ({stock})</h1>
                 <h3>{price}</h3>
-                <button onClick={() => this.props.addToCartClicked(id)}>
+                <button onClick={e => {
+                    console.log(e.target.textContent);
+                    this.props.addToCartClicked(id);
+                }}>
                 ADD TO CART
                 </button>
             </div>

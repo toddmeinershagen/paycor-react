@@ -10,12 +10,10 @@ class ProductList extends React.Component {
         this.state = {
             products : [
                 {id:1, title: "Dell XPS", price:1217.50, stock: 20}, 
-                {id:2, price: 740.12, stock: 20}, 
+                {id:2, title: "Dell Latitude", price: 740.12, stock: 20}, 
                 {id:3, title: "Dell Alienware", price: 1200.60, stock: 20},
                 {id:4, title: "Dell Pad", price: 900.00, stock: 20},
-                {id:5, title: "Dell Mobile1", price: 500.17, stock: 20},
-                { id: 5, title: "Dell Mobile2", price: 500, stock: 20 },
-                { id: 5, title: "Dell Mobile3", price: 500, stock: 20 }
+                {id:5, title: "Dell Mobile", price: 500.17, stock: 20}
             ],
             cart: []
         };
@@ -66,7 +64,8 @@ class ProductList extends React.Component {
                 this.state.products
                 ? this.state.products.map(p => 
                     <ProductListItem 
-                        product={p.id === 2 ? undefined : p} 
+                        key={p.id}
+                        product={p} 
                         addToCartClicked={this.onAddToCart} />
                 )
                 : null

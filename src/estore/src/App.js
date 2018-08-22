@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header.js';
 import ProductList from './components/ProductList.js';
+import AddProduct from './components/AddProduct.js';
 
 /*  This can be produced using Babel.js
 class App extends Component {
@@ -48,6 +49,7 @@ class App extends Component {
     return (
       <div className="App">
       <Header/>
+      <AddProduct/>
       {/*<header className="App-header">
           <img 
             src={logo} 
