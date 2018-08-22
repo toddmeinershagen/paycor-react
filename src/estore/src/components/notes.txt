@@ -28,3 +28,5 @@ state
 props
 -----
     parameters -> props
+    from parent to child = props
+    from child to parent = call parent function
