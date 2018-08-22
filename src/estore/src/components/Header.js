@@ -1,7 +1,8 @@
 import logo from "../logo.svg";
 import React from "react";
 
-function Header() {
+//function Header(props) {
+  function Header({siteTitle, subTitle}) {
     return (
         <header className="App-header">
           <img 
@@ -11,7 +12,14 @@ function Header() {
           <h1 
             className="App-title" 
             title="this is a tooltip from react" 
-            style={{ backgroundColor: "yellow", color: "red" }}>Welcome from React!</h1>
+            style={{ backgroundColor: "yellow", color: "red" }}>
+            {/*{props.siteTitle}*/}
+            {siteTitle}
+          </h1>
+          <h2>
+            {/*{props.subTitle}*/}
+            {subTitle}
+          </h2>
           <h5>{new Date().toISOString()}</h5>
         </header>
     )

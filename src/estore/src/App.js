@@ -48,7 +48,7 @@ class App extends Component {
     //const message = "Welcome to React";
     return (
       <div className="App">
-      <Header/>
+      <Header siteTitle="Welcome to React!" subTitle="I am a sub-title" />
       <AddProduct/>
       {/*<header className="App-header">
           <img 

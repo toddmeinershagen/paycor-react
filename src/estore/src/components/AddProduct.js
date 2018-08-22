@@ -16,6 +16,17 @@ class AddProduct extends Component {
         return (
             <div>
                 <fieldset>
+                    <button
+                        onClick={() => {
+                        console.dir(this.stockEleRef);
+                        console.log(this.stockEleRef.value);
+                        }}
+                    >
+                        GET STOCK
+                    </button>
+                    <button onClick={() => (this.stockEleRef.value = 999)}>
+                        SET STOCK
+                    </button>
                     <legend>Add Product</legend>
                     <form>
                         <label htmlFor="title">Product Title</label>
@@ -46,6 +57,8 @@ class AddProduct extends Component {
                                 </option>
                             ))}
                         </select>
+                        <label htmlFor="stock">Product Stock</label>
+                        <input type="number" ref={eleRef => (this.stockEleRef = eleRef)} />
                     </form>
                 </fieldset>
                 
