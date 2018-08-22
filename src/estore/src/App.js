@@ -3,6 +3,8 @@ import './App.css';
 import Header from './components/Header.js';
 import ProductList from './components/ProductList.js';
 import AddProduct from './components/AddProduct.js';
+import { Route } from 'react-router-dom';
+import NavBar from './components/NavBar';
 
 /*  This can be produced using Babel.js
 class App extends Component {
@@ -48,28 +50,33 @@ class App extends Component {
     //const message = "Welcome to React";
     return (
       <div className="App">
-      <Header siteTitle="Welcome to React!" subTitle="I am a sub-title" />
-      <AddProduct/>
-      {/*<header className="App-header">
-          <img 
-            src={logo} 
-            className="App-logo" 
-            alt="logo" />
-          <h1 
-            className="App-title">{message.toUpperCase()}</h1>
-          <h1 
-            className="App-title" 
-            title="this is a tooltip from react" 
-            style={{ backgroundColor: "yellow", color: "red" }}>{this.getTitle()}</h1>
-          <h1 
-            className="App-title">{message !== undefined ? message : "no message"}</h1>
-          <h5>{new Date().toISOString()}</h5>
-      </header>*/}
-        {/*<p 
-          className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>*/}
-        <ProductList />
+        <Header siteTitle="Welcome to React!" subTitle="I am a sub-title" />
+        <NavBar />
+        <Route exact={true} path="/products" component={ProductList} />
+        <Route path="/products/new" component={AddProduct} />
+
+        {/*<AddProduct/>*/}
+        {/*<ProductList />*/}
+        
+        {/*<header className="App-header">
+            <img 
+              src={logo} 
+              className="App-logo" 
+              alt="logo" />
+            <h1 
+              className="App-title">{message.toUpperCase()}</h1>
+            <h1 
+              className="App-title" 
+              title="this is a tooltip from react" 
+              style={{ backgroundColor: "yellow", color: "red" }}>{this.getTitle()}</h1>
+            <h1 
+              className="App-title">{message !== undefined ? message : "no message"}</h1>
+            <h5>{new Date().toISOString()}</h5>
+        </header>*/}
+          {/*<p 
+            className="App-intro">
+            To get started, edit <code>src/App.js</code> and save to reload.
+          </p>*/}        
       </div>
     );
   }
