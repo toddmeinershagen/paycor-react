@@ -30,3 +30,14 @@ props
     parameters -> props
     from parent to child = props
     from child to parent = call parent function
+
+PropTypes
+---------
+
+Events
+------
+
+Redux
+-----
+action -> store -> reducer -> store -> subscriber - (sync)
+you can add middleware to the store - an extra set of actions that plug in to the pipeline of state changes.

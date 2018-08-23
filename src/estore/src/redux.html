@@ -7,12 +7,20 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Redux</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.0/redux.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/redux-logger@3.0.6/dist/redux-logger.min.js"></script>
     </head>
 
     <body>
-        <button id="inc">INC</button>
-        <span id="result">0</span>
-        <button id="dec">DEC</button>
+        <div>
+            <button id="inc">INC</button>
+            <span id="result">0</span>
+            <button id="dec">DEC</button>
+        </div>
+        <div>
+            <button id="getProducts">GET PRODUCTS</button>
+            <button id="addProduct">ADD PRODUCT</button>
+            <ul id="products"></ul>
+        </div>
         <script>
         /*
             1. Single source of truth
@@ -31,18 +39,45 @@
             const incAction = { type: 'INC', by: 5 };
             const decAction = { type: 'DEC', by: 5 };
 
+            const getProductsActionCreator = function() { 
+                return { type: 'GET_PRODUCTS' };
+            }
+
+            const addProductActionCreator = function (product) { 
+                return { type: 'ADD_PRODUCT', product };
+            }
+
             function counterReducer(prevState = { counter: 0 }, action) {
                 switch(action.type) {
                     case 'INC':
-                        return {counter: prevState.counter + action.by }
+                        return {counter: prevState.counter + action.by };
                     case 'DEC':
-                        return {counter: prevState.counter - action.by }
+                        return {counter: prevState.counter - action.by };
                     default:
                         return prevState;
                 }
             }
 
-            const store = Redux.createStore(counterReducer);
+            function productReducer(prevState = { products: [] }, action) {
+                switch(action.type) {
+                    case 'GET_PRODUCTS':
+                        return { products: prevState.products };
+                    case 'ADD_PRODUCT':
+                        const products = prevState.products.map(p => ({...p}));
+                        products.push({ title: action.product.title });
+                        return { products };
+                    default:
+                        return prevState;
+                }
+            }
+
+            const rootReducer = Redux.combineReducers({
+                counterState: counterReducer,
+                productState: productReducer
+            });
+
+            const store = Redux.createStore(rootReducer, Redux.applyMiddleware(reduxLogger.createLogger()));
+            //const store = Redux.createStore(rootReducer);
             store.subscribe(function() {
                 console.log(store.getState());
             });
@@ -57,10 +92,28 @@
                 store.dispatch(decAction);
             });
 
-            const span = document.querySelector("#result");
-            store.subscribe(function() {
-                span.textContent = store.getState().counter;
+            const getProductsBtn = document.querySelector("#getProducts");
+            getProductsBtn.addEventListener("click", function() {
+                const action = getProductsActionCreator();
+                store.dispatch(action);
             })
+
+            const addProductBtn = document.querySelector("#addProduct");
+            addProductBtn.addEventListener("click", function() {
+                const action = addProductActionCreator({
+                    title: `product - ${Math.random()}`
+                });
+                store.dispatch(action);
+            })
+
+            const span = document.querySelector("#result");
+            const productList = document.querySelector("#products");
+
+            store.subscribe(function() {
+                span.textContent = store.getState().counterState.counter;
+                const items = store.getState().productState.products.map(p => `<li>${p.title}</li>`).join('');
+                products.innerHTML = items;
+            });
         </script>
     </body>
 </html>
