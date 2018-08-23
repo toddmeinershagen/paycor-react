@@ -2,6 +2,7 @@
 import React, { PureComponent } from 'react';
 import "./ProductListItem.css";
 import PropTypes from "prop-types";
+import {Link} from 'react-router-dom';
 
 //class ProductListItem extends Component {
 class ProductListItem extends PureComponent {
@@ -28,7 +29,11 @@ class ProductListItem extends PureComponent {
                 onMouseEnter = {() => console.log("enter")}
                 onMouseLeave = {() => console.log("leave")}
             >
-                <h1>{title} ({stock})</h1>
+                <h1>
+                    <Link to={`/products/${id}`}>
+                        {title} ({stock})
+                    </Link>
+                </h1>
                 <h3>{price}</h3>
                 <button onClick={e => {
                     console.log(e.target.textContent);

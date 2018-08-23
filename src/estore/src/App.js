@@ -3,8 +3,11 @@ import './App.css';
 import Header from './components/Header.js';
 import ProductList from './components/ProductList.js';
 import AddProduct from './components/AddProduct.js';
-import { Route } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import NavBar from './components/NavBar';
+import ProductDetail from './components/ProductDetail';
+import NotFound from './components/NotFound';
+import Login from './components/Login';
 
 /*  This can be produced using Babel.js
 class App extends Component {
@@ -43,6 +46,11 @@ export default App;
 //{expression} anything can go in here.
 //use className as the class attribute because class is a keyword in JS
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {isAdmin: false}
+  }
   getTitle() {
     return "Welcome to React - from method";
   }
@@ -52,8 +60,23 @@ class App extends Component {
       <div className="App">
         <Header siteTitle="Welcome to React!" subTitle="I am a sub-title" />
         <NavBar />
-        <Route exact={true} path="/products" component={ProductList} />
-        <Route path="/products/new" component={AddProduct} />
+        <button onClick={() => this.setState({ isAdmin: !this.state.isAdmin })}>Toggle Admin</button>
+        <Switch>
+          <Route 
+            exact={true} 
+            path="/products" 
+            render={props => <ProductList {...props} additionalProp="test" />} 
+          />
+          <Route 
+            path="/products/new" 
+            render={props => { 
+              return (this.state.isAdmin ? <AddProduct/> : <Redirect to="/login" /> )
+            }}  
+          />
+          <Route exact path="/products/:productId" component={ProductDetail} />
+          <Route exact path="/login" component={Login} />
+          <Route component={NotFound} />
+        </Switch>
 
         {/*<AddProduct/>*/}
         {/*<ProductList />*/}
